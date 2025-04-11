@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinHub - PinHub Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background setup */
+        body {
+            background-image: url('/static/background.jpg'); /* Ensure correct path */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Centering the form inside the circle */
+        .login-container {
+            position: absolute;
+            top: 52%; /* Moved slightly down */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            text-align: center;
+            padding: 10px;
+            background: none; /* Remove outer box */
+            border: none;
+        }
+
+        .login-container h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px; /* Increased space above input fields */
+            font-weight: bold;
+        }
+
+        /* Styling input fields */
+        .input-group {
+            width: 100%;
+            margin-bottom: 14px; /* Increased spacing */
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-group input {
+            width: 200px;
+            padding: 10px;
+            border: 2px solid #ff4757; /* Keep textboxes visible */
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            text-align: bottom;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling the login button */
+        .login-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 150px;
+            border-radius: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 15px auto 0; /* Moved slightly lower */
+        }
+
+        .login-btn:hover {
+            background: #e84118;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>PinHub Login</h2>
+        <form action="/" method="post">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

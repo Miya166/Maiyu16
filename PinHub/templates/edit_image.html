@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polish Your Pin - PinHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://img.freepik.com/premium-vector/abstract-mountain-contemporary-aesthetic-backgrounds-landscape_532781-57.jpg") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 300px;
+            margin: 60px auto;
+            padding: 20px;
+            background-color: #aa775d;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 25px;
+            font-family: 'Lobster', cursive;
+            animation: fadeInUp 1s ease-out;
+            font-size: 32px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-preview img {
+            max-width: 40%;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #2980b9;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 26px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #1e6fa8;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 30px 20px;
+                padding: 20px;
+            }
+        }
+    </style>    
+</head>
+<body>
+
+<div class="container">
+    <h2>Polish Your Pin</h2>
+
+    <div class="image-preview">
+        <img src="{{ url_for('static', filename='uploaded/' + image[1]) }}" alt="Current Image">
+    </div>
+
+    <form action="{{ url_for('edit_image', image_id=image[0]) }}" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="{{ image[2] }}" required>
+
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" value="{{ image[3] }}">
+
+        <label for="category">Category:</label>
+        <select name="category" id="category" required>
+            <option value="Food" {% if image[4] == "Food" %}selected{% endif %}>Food</option>
+            <option value="Nature" {% if image[4] == "Nature" %}selected{% endif %}>Nature</option>
+            <option value="Fashion" {% if image[4] == "Fashion" %}selected{% endif %}>Fashion</option>
+            <option value="Travel" {% if image[4] == "Travel" %}selected{% endif %}>Travel</option>
+            <option value="Interior" {% if image[4] == "Interior" %}selected{% endif %}>Interior</option>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>
