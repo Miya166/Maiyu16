@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PinHub - Admin Login</title>
+    <title>PinHub - Welcome to Your Creative Corner
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,73 +14,88 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
-        /* Set the background image */
+        /* Background setup */
         body {
-            background-image: url('/static/background.jpg'); /* Ensure the image is in the 'static' folder */
+            background-image: url('/static/background.jpg'); /* Ensure correct path */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            height: 100vh;
+            height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
-        /* Login box styling */
+        /* Centering the form inside the circle */
         .login-container {
-            background:transparent;
-            padding: 30px;
-            border-radius: 10px;
-          
+            position: absolute;
+            top: 52%;
+            left: 49.5%;
+            transform: translate(-50%, -50%);
+            width: 250px;
             text-align: center;
-            width: 320px;
+            padding: 75px 10px 10px; /* ⬅️ Added 40px top padding */
+            background: none;
+            border: none;
         }
 
         .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 25px;
+            font-family: 'Lobster', cursive;
+            animation: fadeInUp 1s ease-out;
         }
 
+        /* Styling input fields */
         .input-group {
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 14px; /* Increased spacing */
+            display: flex;
+            justify-content: center;
         }
 
         .input-group input {
-            width: 100%;
+            width: 200px;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            border: 2px solid #ff4757; /* Keep textboxes visible */
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            text-align: bottom;
+            background: rgba(255, 255, 255, 0.8);
         }
 
+        .input-group input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling the login button */
         .login-btn {
             background: #ff4757;
             color: white;
             border: none;
             padding: 10px;
-            width: 100%;
-            border-radius: 5px;
+            width: 150px;
+            border-radius: 15px;
             font-size: 16px;
             cursor: pointer;
             transition: 0.3s;
+            display: block;
+            margin: 15px auto 0; /* Moved slightly lower */
         }
 
         .login-btn:hover {
             background: #e84118;
         }
 
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Admin Login</h2>
-        <form action="/login" method="post">
+        <h2>Welcome to Your Creative Corner</h2>
+        <form action="/" method="post">
             <div class="input-group">
                 <input type="text" name="username" placeholder="Username" required>
             </div>
