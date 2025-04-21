@@ -5,56 +5,46 @@ pipeline {
         IMAGE_NAME = 'pinhub-app'
         CONTAINER_NAME = 'pinhub-container'
         PORT = '5000'
-        DOCKERFILE_PATH = './PinHub' // Update if Dockerfile is located somewhere else
     }
 
     stages {
-
-        stage('Clone Repository') {
-            steps {
-                echo 'Repository is automatically cloned by Jenkins (SCM configured)'
-            }
-        }
-
         stage('Verify Files') {
             steps {
                 echo 'Verifying the contents of the workspace...'
-                sh 'ls -l $WORKSPACE'
-                sh 'ls -l $DOCKERFILE_PATH'
+                sh 'ls -l'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image: $IMAGE_NAME from $DOCKERFILE_PATH"
-                sh "docker build -t $IMAGE_NAME $DOCKERFILE_PATH"
+                echo 'Building Docker image for PinHub...'
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                echo "Stopping old container (if running): $CONTAINER_NAME"
-                sh "docker stop $CONTAINER_NAME || true"
+                echo 'Stopping existing PinHub container (if any)...'
+                sh 'docker stop $CONTAINER_NAME || true'
             }
         }
 
         stage('Remove Old Container') {
             steps {
-                echo "Removing old container (if exists): $CONTAINER_NAME"
-                sh "docker rm $CONTAINER_NAME || true"
+                echo 'Removing old PinHub container (if any)...'
+                sh 'docker rm $CONTAINER_NAME || true'
             }
         }
 
         stage('Run New Container') {
             steps {
-                echo "Running new container: $CONTAINER_NAME on port $PORT"
-                sh "docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME"
+                echo 'Starting new PinHub container...'
+                sh 'docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME'
             }
         }
 
         stage('List Running Containers') {
             steps {
-                echo 'Listing running Docker containers...'
                 sh 'docker ps'
             }
         }
@@ -62,7 +52,7 @@ pipeline {
 
     post {
         always {
-            echo '✅ PinHub pipeline execution completed!'
+            echo 'PinHub pipeline execution completed!'
         }
     }
 }
