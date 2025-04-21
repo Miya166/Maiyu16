@@ -18,28 +18,28 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image for PinHub...'
-                sh 'docker build -t $IMAGE_NAME .'
+                sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
         stage('Stop Old Container') {
             steps {
                 echo 'Stopping existing PinHub container (if any)...'
-                sh 'docker stop $CONTAINER_NAME || true'
+                sh "docker stop ${CONTAINER_NAME} || true"
             }
         }
 
         stage('Remove Old Container') {
             steps {
                 echo 'Removing old PinHub container (if any)...'
-                sh 'docker rm $CONTAINER_NAME || true'
+                sh "docker rm ${CONTAINER_NAME} || true"
             }
         }
 
         stage('Run New Container') {
             steps {
                 echo 'Starting new PinHub container...'
-                sh 'docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME'
+                sh "docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${IMAGE_NAME}"
             }
         }
 
