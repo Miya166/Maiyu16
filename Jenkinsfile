@@ -8,10 +8,10 @@ pipeline {
     }
 
     stages {
-        stage('Verify Files') {
+        stage('Checkout') {
             steps {
-                echo 'Verifying the contents of the workspace...'
-                sh 'ls -l'
+                echo 'Checking out the latest code...'
+                checkout scm
             }
         }
 
@@ -22,30 +22,18 @@ pipeline {
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Run Container') {
             steps {
-                echo 'Stopping existing PinHub container (if any)...'
-                sh "docker stop ${CONTAINER_NAME} || true"
-            }
-        }
-
-        stage('Remove Old Container') {
-            steps {
-                echo 'Removing old PinHub container (if any)...'
-                sh "docker rm ${CONTAINER_NAME} || true"
-            }
-        }
-
-        stage('Run New Container') {
-            steps {
-                echo 'Starting new PinHub container...'
+                echo 'Running PinHub container...'
                 sh "docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${IMAGE_NAME}"
             }
         }
 
-        stage('List Running Containers') {
+        stage('Test') {
             steps {
-                sh 'docker ps'
+                echo 'Running tests for PinHub container...'
+                // Add any commands to test your app, e.g., curl or integration tests
+                sh "curl http://localhost:${PORT}/health"  // Assuming you have a health endpoint
             }
         }
     }
